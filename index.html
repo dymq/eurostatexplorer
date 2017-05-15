@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Eurostat explorer</title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/4.0.4/ui-grid.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/4.0.4/ui-grid.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    
+    <script type="text/javascript" src="lib/json-stat.js"></script>
+    
+    <script type="text/javascript" src="app/app.js"></script>
+  
+  </head>
+  
+  <body ng-app="ee">
+    <div ng-controller="dataFetch">
+	    <form>
+	    <div class="alert alert-info">
+	    	<h3 style="display:inline;">Select dataset to download:</h3>
+	    	<select ng-model="dataset" style="max-width: 100%;">
+	    		<option value="ipr_ta_tot">European Union trade mark (EUTM) applications</option>
+	    		<option value="pat_ep_ntec">High-tech patent applications to the EPO by priority year</option>
+	    	</select>
+	    	
+	    	<button ng-click="fetch()" class="btn btn-xs btn-primary">Fetch</button>
+	    	<span style="color: green; font-size: 1.3em">{{ status }}</span>
+	    	<button ng-show="sv" ng-click="save()" class="btn btn-xs btn-info">Save (local storage)</button>
+	    	<div ng-show="ls">
+	    		<h4 style="display:inline; line-height: 2;">Data to load from local storage: <b>{{ saved }}</b></h4>
+				<button ng-click="load()" class="btn btn-xs btn-success">Load</button>
+			</div>
+	    </div>
+	    <div id="datagrid" ui-grid="gridOptions" class="grid"></div>
+	    </form>
+    {{ data }}
+    </div>
+  </body>
+  
+</html>
