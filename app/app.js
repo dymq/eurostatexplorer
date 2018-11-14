@@ -9,7 +9,7 @@ function compile(element){
 
 agGrid.initialiseAgGridWithAngular1(angular);
 
-var app = angular.module('ee', ["agGrid", 'chart.js', 'textAngular']);
+var app = angular.module('ee', ["agGrid", 'chart.js', 'textAngular', 'ng-sweet-alert']);
 
 app.controller('dataFetch', function($scope, $window) {
 	
@@ -300,8 +300,15 @@ app.controller('dataFetch', function($scope, $window) {
 	};
 	
 	$scope.windowed = function () {
-        var nw = $window.open();
-        nw.document.write($scope.report);
+	swal({
+  		title: "The report",
+ 		text: "Your report will now open in new window",
+		icon: "info"
+		})
+		.then( function() {
+	        var nw = $window.open();
+	        nw.document.write($scope.report);
+		});
     };	
 	
 })
